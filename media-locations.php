@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name:     Media Locations
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin URI:      https://jonathandesrosiers.com
+ * Description:     Store GPS location data stored in image EXIF data into post meta for attachments.
+ * Author:          Jonathan Desrosiers
+ * Author URI:      https://jonathandesrosiers.com
  * Text Domain:     media-locations
  * Domain Path:     /languages
  * Version:         0.1.0
@@ -68,7 +68,7 @@ function admin_init() {
 		return;
 	}
 
-	$title       = __( 'Media Library' );
+	$title       = __( 'Media Library', 'media-locations' );
 	$parent_file = 'upload.php';
 
 	require_once( ABSPATH . 'wp-admin/admin-header.php' );
@@ -83,7 +83,7 @@ function admin_init() {
 				<?php
 				printf(
 				/* translators: %s: list view URL */
-					__( 'The map view for the Media Library requires JavaScript. <a href="%s">Switch to the list view</a>.' ),
+					__( 'The map view for the Media Library requires JavaScript. <a href="%s">Switch to the list view</a>.', 'media-locations' ),
 					'upload.php?mode=list'
 				);
 				?>
