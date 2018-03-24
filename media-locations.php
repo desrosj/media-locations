@@ -59,3 +59,39 @@ function wp_read_image_metadata( $meta, $file, $sourceImageType ) {
 	return $meta;
 }
 add_filter( 'wp_read_image_metadata', __NAMESPACE__ . '\wp_read_image_metadata', 10, 3 );
+
+/**
+ * Display a map mode in the admin.
+ */
+function admin_init() {
+	if ( ! isset( $_GET['mode'] ) || 'map' !== wp_unslash( $_GET['mode'] ) ) {
+		return;
+	}
+
+	$title       = __( 'Media Library' );
+	$parent_file = 'upload.php';
+
+	require_once( ABSPATH . 'wp-admin/admin-header.php' );
+	?>
+	<div class="wrap" id="wp-media-locations" data-search="<?php _admin_search_query(); ?>">
+		<h1 class="wp-heading-inline"><?php echo esc_html( $title ); ?></h1>
+
+		<hr class="wp-header-end">
+
+		<div class="error hide-if-js">
+			<p>
+				<?php
+				printf(
+				/* translators: %s: list view URL */
+					__( 'The map view for the Media Library requires JavaScript. <a href="%s">Switch to the list view</a>.' ),
+					'upload.php?mode=list'
+				);
+				?>
+			</p>
+		</div>
+	</div>
+	<?php
+	include( ABSPATH . 'wp-admin/admin-footer.php' );
+	exit;
+}
+add_action( 'admin_init', __NAMESPACE__ . '\admin_init' );
